@@ -1,0 +1,187 @@
+#--[i3 configuration file]--#
+
+
+set $mod Mod1
+
+font pango:monospace 13
+font pango:monospace 13
+
+### Borders ###
+new_window pixel 2
+new_float pixel 2
+
+### Gaps ###
+set $default_gaps_inner 11
+set $default_gaps_outer 5
+gaps inner $default_gaps_inner
+gaps outer $default_gaps_outer
+smart_gaps on
+smart_borders on
+
+# Define color variables
+set $focus_border    #BF00FF
+set $focus_bg        #565656
+set $focus_text      #ffffff
+set $focus_indicator #2e9ef4
+set $focus_child     #285577
+
+set $unfocus_border    #B7121F
+set $unfocus_bg        #76DFFF
+set $unfocus_text      #888888
+set $unfocus_indicator #292d2e
+set $unfocus_child     #222222
+
+# Apply colors to clients
+# class           border         background text         indicator        child_border
+client.focused    $focus_border  $focus_bg  $focus_text  $focus_indicator $focus_child
+client.unfocused  $unfocus_border $unfocus_bg $unfocus_text $unfocus_indicator $unfocus_child
+
+# Default layout
+workspace_layout default 
+
+# class                 border  backgr. text    indicator
+client.focused          #BF00FF #BF00FF #000000 #BF00FF
+client.focused_inactive #21FC0D #000000 #FFFFFF #21FC0D
+client.unfocused        #7DF9FF #000000 #FFFFFF #000000
+client.urgent           #7DF9FF #000000 #ffffff #000000
+client.placeholder      #7DF9FF #000000 #ffffff #000000
+
+for_window [class="mpv"] border pixel 0
+
+# start a terminal
+bindsym $mod+Return exec urxvt
+
+# live wallpaper
+
+#exec --no-startup-id xwinwrap -b -nf -ov -fs -- mpv -wid WID --loop --no-audio --panscan="1.0" /home/hp/Pictures/bground.mp4
+
+
+# autostart programs
+##exec --no-startup-id compton
+exec --no-startup-id autotiling
+exec --no-startup-id picom -bf
+exec --no-startup-id urxvt 
+#exec --no-startup-id wal -R
+#exec --no-startuo-id conky
+#exec --no-startup-id clock | lemonbar -b -u 2 -p
+#exec_always --no-startup-id ~/.config/lemonbar/bar.sh | lemonbar -p -g x28 -F "#ebdbb2" -B "#282828" -f "monospace-10"
+
+# start programs
+#bindsym $mod+w exec --no-startup-id pcmanfm
+#bindsym $mod+e  exec --no-startup-id google-chrome
+#bindsym $mod+y  exec --no-startup-id rofi
+#bindsym $mod+Ctrl+k  exec --no-startup-id lxappearance
+#bindsym $mod+Ctrl+g  exec --no-startup-id gnumeric
+#bindsym $mod+Ctrl+w  exec --no-startup-id wicd-gtk
+#bindsym $mod+Ctrl+t  exec --no-startup-id transmission-gtk
+#bindsym $mod+Ctrl+q  exec --no-startup-id feh --scale-down --image-bg black /home/hp/Helpers/qutebrowser_guide.png
+#bindsym $mod+Ctrl+r exec--no-startup-id feh --scale-down --image-bg black /home/hp/Helpers/ranger_guide.png
+
+# open pcmanfm to specific directory
+#bindsym $mod+Shift+k exec pcmanfm /media/slipedog
+#bindsym $mod+Shift+Return exec --no-startup-id urxvt -e ranger 
+
+# change the wallpaper
+#bindsym $mod+Shift+w exec wal -i $(find ~/Pictures/Wallpapers|shuf -n1)
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi 
+bindsym $mod+d exec bash -c "rofi -show run" -font "FreeMono 12" -columns 5 -lines 1 -color-window "#FFFFFF" -hide-scrollbar -terminal urxvt
+
+# change focus windows
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused windows alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+z layout tabbed
+bindsym $mod+x layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+q focus parent
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+10 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+10 move container to workspace 10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym m resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+
